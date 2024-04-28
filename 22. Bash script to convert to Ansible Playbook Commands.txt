@@ -1,0 +1,37 @@
+#!/bin/bash
+sudo su
+yum update -y
+yum install -y httpd
+cd /var/www/html
+wget https://github.com/azeezsalu/jupiter/archive/refs/heads/main.zip
+unzip main.zip
+cp -r jupiter-main/* /var/www/html/
+rm -rf jupiter-main main.zip
+systemctl enable httpd 
+systemctl start httpd
+
+
+============================================================================
+EXPLANATION OF THE CODE ABOVE
+
+
+Bash script that automates the deployment process of the Jupiter website. Here's a breakdown of each command:
+
+#!/bin/bash: This line specifies the interpreter to be used, indicating that the script should be executed using the Bash shell.
+sudo su: This command attempts to switch the user to the superuser (root) using sudo. However, this line might not work as intended in a script because it will prompt for a password unless sudo is configured to allow passwordless execution.
+yum update -y: This command updates all packages on the system using the YUM package manager (-y flag is used to automatically answer yes to all prompts).
+yum install -y httpd: This command installs the Apache HTTP server.
+cd /var/www/html: Changes the current working directory to /var/www/html.
+wget https://github.com/azeezsalu/jupiter/archive/refs/heads/main.zip: Downloads the main.zip file from the specified GitHub repository.
+unzip main.zip: Unzips the downloaded main.zip file.
+cp -r jupiter-main/* /var/www/html/: Copies the contents of the extracted jupiter-main directory to /var/www/html/.
+rm -rf jupiter-main main.zip: Removes the jupiter-main directory and the downloaded main.zip file.
+systemctl enable httpd: Enables the Apache HTTP server to start automatically on system boot.
+systemctl start httpd: Starts the Apache HTTP server.
+This script is designed to be run on a system where the Apache HTTP server can be installed and configured using the yum package manager. However, as mentioned earlier, the sudo su command might not work as intended in a script, and it's generally recommended to avoid switching users in this manner in automation scripts. Instead, use sudo directly for individual commands that require elevated privileges.
+
+
+
+
+
+
