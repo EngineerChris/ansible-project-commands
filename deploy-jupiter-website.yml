@@ -1,0 +1,54 @@
+---
+
+- name: deploy jupiter website
+  hosts: all            # Ansible will install teh websites in all the webservers listed in the inventory files
+  become: yes           # Ansible will use privilege escalation mechanisms (such as sudo) to execute tasks with elevated privileges.
+  become_user: root     # Specifies the user account that Ansible will use for privilege escalation. In this case, tasks will be executed as the root user after privilege escalatio
+
+  tasks:
+    - name: update all packages on ec2 instance
+      yum:
+        name: "*"       # Update all packages in the ec2-instance
+        state: latest   # get latest version of all the packages
+        update_cache: yes
+
+    - name: install apache server
+      yum:
+        name: httpd
+        state: latest   # state is the version of package we want to install
+
+    - name: change directory to the html directory
+      shell:  cd /var/wwww/html
+
+    - name: download web files from github
+      get_url:
+        url: https://github.com/azeezsalu/jupiter/archive/refs/heads/main.zip
+        dest: /var/wwww/html/
+
+    - name: unzip / extract the zip folder
+      ansible.builtin.unarchive:
+        src: /var/wwww/html/jupiter-main.zip
+        dest: /var/wwww/html/
+        remote_src: yes                         # asking whether the server we are unzipping the file on is remote
+
+    - name: copy webfiles from the jupiter-main directory to the html directory
+      copy: 
+        src: /var/wwww/html/jupiter-main         #copies all the files in the "jupiter-main" directory to "/var/wwww/html/""
+        dest: /var/wwww/html/
+        remote_src: yes
+
+    - name: remove the jupiter-main directory
+      file: 
+        path: /var/wwww/html/jupiter-main
+        state: absent
+
+    - name: remove the jupiter-main.zip folder
+      file: 
+        path: /var/wwww/html/jupiter-main.zip
+        state: absent
+
+    - name: start apache server, if not started
+      ansible.builtin.service:
+        enabled: yes
+        name: httpd
+        state: started
