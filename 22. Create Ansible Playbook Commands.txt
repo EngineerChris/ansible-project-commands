@@ -9,3 +9,6 @@ cp -r jupiter-main/* /var/www/html/
 rm -rf jupiter-main main.zip
 systemctl enable httpd 
 systemctl start httpd
+
+
+
