@@ -3,8 +3,6 @@
 
 **Automated Deployment of Jupiter Website on EC2 Instances**
 
-**Author:** Christiana Bello
-
 This repository contains an Ansible playbook that automates the deployment process of the Jupiter website on EC2 instances. It streamlines the setup and configuration of the Apache server and ensures the latest version of the website is deployed.
 
 ## Prerequisites
@@ -30,7 +28,7 @@ The playbook executes the following tasks:
 - Adjust the directory paths and filenames according to your server configuration.
 
 ## Ansible Playbooks and Modules Resources
-[Ansible Plabook](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html)
-[Ansible Modules](https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html)
+- [Ansible Plabook](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html)
+- [Ansible Modules](https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html)
 
 
