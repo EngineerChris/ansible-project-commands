@@ -29,8 +29,6 @@ The playbook executes the following tasks:
 - Update the GitHub repository URL in the playbook to point to your own repository if needed.
 - Adjust the directory paths and filenames according to your server configuration.
 
-
-
 ## Ansible Playbooks and Modules Resources
 [Ansible Plabook](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html)
 [Ansible Modules](https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html)
